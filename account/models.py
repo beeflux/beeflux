@@ -14,8 +14,8 @@ class Company(models.Model):
 
     class META:
         db_table = 'company'
-        get_latest_by = ['-created_date']
-        ordering = ['-created_date']
+        get_latest_by = ['-date_created']
+        ordering = ['-date_created']
         indexes = [
             models.Index(fields=['name']),
         ]
