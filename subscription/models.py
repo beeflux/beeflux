@@ -15,9 +15,10 @@ class Package(models.Model):
 
     class Meta:
         db_table = 'package'
+    
 
 class Subscription(models.Model):
-    package = models.ForeignKey("Package",related_name="subscriptions",on_delete=models.CASCADE)
+    package = models.ForeignKey("package",related_name="subscriptions",on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField(auto_now_add=False)
@@ -25,8 +26,6 @@ class Subscription(models.Model):
     class Meta:
         get_latest_by = ['-priority', 'order_date']
 
-    def __str__(self):
-        return self.package
 
 class Payment(models.Model):
     subscription = models.ForeignKey("Subscription", related_name='subscription', on_delete=models.CASCADE)
