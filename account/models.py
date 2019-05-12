@@ -11,3 +11,16 @@ class Company(models.Model):
     description = models.TextField()
     vat_number = models.CharField(max_length=40, blank=False, null=False)
     address = models.CharField(max_length=300)
+
+    class META:
+        db_table = 'company'
+        get_latest_by = ['-created_date']
+        ordering = ['-created_date']
+        indexes = [
+            models.Index(fields=['name']),
+        ]
+        verbose_name = 'company'
+        verbose_name_plural = 'companys'
+
+    def __str__(self):
+        return '%s %s' %(self.name, self.address)
